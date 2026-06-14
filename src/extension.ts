@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import { buildDebugBrief } from './debugBrief';
 
 export function activate(context: vscode.ExtensionContext) {
-  const disposable = vscode.commands.registerCommand(
+  const fromSelection = vscode.commands.registerCommand(
     'debugbrief.createFromSelection',
     async () => {
       const editor = vscode.window.activeTextEditor;
@@ -19,27 +19,56 @@ export function activate(context: vscode.ExtensionContext) {
         return;
       }
 
-      const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
-      const brief = buildDebugBrief({
+      await createBrief({
         input: selectedText,
-        fileName: editor.document.fileName,
-        workspaceName: workspaceFolder?.name ?? 'Unknown workspace'
+        fileName: editor.document.fileName
       });
-
-      const uri = await writeBrief(brief);
-      const doc = await vscode.workspace.openTextDocument(uri);
-
-      await vscode.window.showTextDocument(doc, { preview: false });
-      await vscode.env.clipboard.writeText(brief);
-      vscode.window.showInformationMessage(`DebugBrief saved to ${uri.fsPath} and copied to clipboard.`);
     }
   );
 
-  context.subscriptions.push(disposable);
+  const fromClipboard = vscode.commands.registerCommand(
+    'debugbrief.createFromClipboard',
+    async () => {
+      const clipboardText = (await vscode.env.clipboard.readText()).trim();
+
+      if (!clipboardText) {
+        vscode.window.showWarningMessage('Clipboard is empty. Copy an error, stack trace, or log excerpt first.');
+        return;
+      }
+
+      await createBrief({
+        input: clipboardText,
+        fileName: 'clipboard'
+      });
+    }
+  );
+
+  context.subscriptions.push(fromSelection, fromClipboard);
 }
 
 export function deactivate() {
   // No cleanup needed yet.
+}
+
+type CreateBriefArgs = {
+  input: string;
+  fileName: string;
+};
+
+async function createBrief({ input, fileName }: CreateBriefArgs): Promise<void> {
+  const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
+  const brief = buildDebugBrief({
+    input,
+    fileName,
+    workspaceName: workspaceFolder?.name ?? 'Unknown workspace'
+  });
+
+  const uri = await writeBrief(brief);
+  const doc = await vscode.workspace.openTextDocument(uri);
+
+  await vscode.window.showTextDocument(doc, { preview: false });
+  await vscode.env.clipboard.writeText(brief);
+  vscode.window.showInformationMessage(`DebugBrief saved to ${uri.fsPath} and copied to clipboard.`);
 }
 
 async function writeBrief(brief: string): Promise<vscode.Uri> {

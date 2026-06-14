@@ -12,7 +12,8 @@ Turn terminal errors into AI-ready debugging briefs from VS Code.
 
 1. Developer copies or selects a failing test output, stack trace, or terminal
    error.
-2. Developer runs `DebugBrief: Create Debug Brief From Selection`.
+2. Developer runs `DebugBrief: Create Debug Brief From Selection` or
+   `DebugBrief: Create Debug Brief From Clipboard`.
 3. Extension creates a Markdown brief with:
    - short summary placeholder
    - raw error/log excerpt

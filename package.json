@@ -12,7 +12,8 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:debugbrief.createFromSelection"
+    "onCommand:debugbrief.createFromSelection",
+    "onCommand:debugbrief.createFromClipboard"
   ],
   "main": "./dist/extension.js",
   "contributes": {
@@ -20,6 +21,10 @@
       {
         "command": "debugbrief.createFromSelection",
         "title": "DebugBrief: Create Debug Brief From Selection"
+      },
+      {
+        "command": "debugbrief.createFromClipboard",
+        "title": "DebugBrief: Create Debug Brief From Clipboard"
       }
     ]
   },

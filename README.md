@@ -24,6 +24,7 @@ VS Code command:
 
 ```text
 DebugBrief: Create Debug Brief From Selection
+DebugBrief: Create Debug Brief From Clipboard
 ```
 
 Current behavior:
@@ -35,6 +36,26 @@ Current behavior:
 - writes a Markdown debug brief to `.promptpack/debugbrief-*.md`
 - opens the generated brief in VS Code
 - copies the brief to the clipboard
+
+## Local VS Code Test
+
+1. Open this folder in VS Code:
+
+   ```bash
+   code /home/serdar/AI-products/promptpack
+   ```
+
+2. Press `F5` and choose `Run DebugBrief Extension`.
+3. In the extension development window, open one of:
+
+   ```text
+   samples/python-pytest-failure.log
+   samples/typescript-build-failure.log
+   ```
+
+4. Select the log text.
+5. Run `DebugBrief: Create Debug Brief From Selection`.
+6. Confirm that a Markdown file appears under `.promptpack/`.
 
 ## Development
 

@@ -21,3 +21,9 @@
   - added Node tests for signal detection, command detection, and Markdown brief
     generation
   - verified with `npm test`
+- Added a second MVP usability pass:
+  - command `DebugBrief: Create Debug Brief From Clipboard`
+  - VS Code extension host launch config under `.vscode/`
+  - sample pytest and TypeScript failure logs under `samples/`
+  - README instructions for local extension testing with `F5`
+  - verified again with `npm test`

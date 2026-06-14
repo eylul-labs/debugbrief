@@ -1,0 +1,19 @@
+$ pytest tests/test_price.py
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.2.0
+collected 1 item
+
+tests/test_price.py F
+
+=================================== FAILURES ===================================
+___________________________ test_applies_discount ____________________________
+
+    def test_applies_discount():
+>       assert calculate_total(100, discount=10) == 90
+E       assert 100 == 90
+E        +  where 100 = calculate_total(100, discount=10)
+
+tests/test_price.py:7: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_price.py::test_applies_discount - assert 100 == 90
+
