@@ -1,0 +1,37 @@
+{
+  "name": "debugbrief-vscode",
+  "displayName": "DebugBrief",
+  "description": "Turn terminal errors and logs into AI-ready debugging briefs.",
+  "version": "0.0.1",
+  "publisher": "serdar-ai",
+  "private": true,
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:debugbrief.createFromSelection"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "debugbrief.createFromSelection",
+        "title": "DebugBrief: Create Debug Brief From Selection"
+      }
+    ]
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "vscode:prepublish": "npm run compile"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/vscode": "^1.95.0",
+    "typescript": "^5.8.0"
+  }
+}
+
