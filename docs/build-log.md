@@ -51,3 +51,7 @@
   copies the brief to the clipboard, so running the clipboard command again can
   create a nested DebugBrief. Added guardrails that warn when clipboard or
   selection already contains a generated DebugBrief.
+- Bumped extension to `0.0.2` so VS Code installs a clearly newer package.
+- Changed clipboard command so it does not overwrite the clipboard with the
+  generated brief. This prevents accidental repeated nested brief generation
+  during the clipboard-path workflow.

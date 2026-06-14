@@ -2,7 +2,7 @@
   "name": "debugbrief-vscode",
   "displayName": "DebugBrief",
   "description": "Turn terminal errors and logs into AI-ready debugging briefs.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "serdar-ai",
   "private": true,
   "license": "UNLICENSED",
@@ -31,7 +31,7 @@
   },
   "scripts": {
     "compile": "tsc -p ./",
-    "package": "vsce package --out debugbrief-0.0.1.vsix",
+    "package": "vsce package --out debugbrief-$npm_package_version.vsix",
     "test": "npm run compile && node --test test/*.test.js",
     "watch": "tsc -watch -p ./",
     "vscode:prepublish": "npm run compile"

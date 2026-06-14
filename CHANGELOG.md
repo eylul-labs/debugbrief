@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.0.2
+
+- Read copied or selected local file paths as log content.
+- Prevent nested DebugBrief generation when clipboard/selection already contains
+  a generated brief.
+- Stop overwriting the clipboard when using
+  `DebugBrief: Create Debug Brief From Clipboard`.
+
 ## 0.0.1
 
 - Initial DebugBrief MVP.
@@ -11,4 +19,3 @@
   failures, exceptions, and compiler diagnostics.
 - Save generated briefs to `.promptpack/debugbrief-*.md`.
 - Copy generated briefs to the clipboard.
-

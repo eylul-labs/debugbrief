@@ -21,7 +21,8 @@ export function activate(context: vscode.ExtensionContext) {
 
       await createBriefFromRawInput({
         input: selectedText,
-        fileName: editor.document.fileName
+        fileName: editor.document.fileName,
+        copyToClipboard: true
       });
     }
   );
@@ -38,7 +39,8 @@ export function activate(context: vscode.ExtensionContext) {
 
       await createBriefFromRawInput({
         input: clipboardText,
-        fileName: 'clipboard'
+        fileName: 'clipboard',
+        copyToClipboard: false
       });
     }
   );
@@ -53,6 +55,7 @@ export function deactivate() {
 type CreateBriefArgs = {
   input: string;
   fileName: string;
+  copyToClipboard: boolean;
 };
 
 async function createBriefFromRawInput(args: CreateBriefArgs): Promise<void> {
@@ -75,7 +78,7 @@ async function createBriefFromRawInput(args: CreateBriefArgs): Promise<void> {
   await createBrief(resolved);
 }
 
-async function createBrief({ input, fileName }: CreateBriefArgs): Promise<void> {
+async function createBrief({ input, fileName, copyToClipboard }: CreateBriefArgs): Promise<void> {
   const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
   const brief = buildDebugBrief({
     input,
@@ -87,43 +90,52 @@ async function createBrief({ input, fileName }: CreateBriefArgs): Promise<void> 
   const doc = await vscode.workspace.openTextDocument(uri);
 
   await vscode.window.showTextDocument(doc, { preview: false });
-  await vscode.env.clipboard.writeText(brief);
-  vscode.window.showInformationMessage(`DebugBrief saved to ${uri.fsPath} and copied to clipboard.`);
+  if (copyToClipboard) {
+    await vscode.env.clipboard.writeText(brief);
+    vscode.window.showInformationMessage(`DebugBrief saved to ${uri.fsPath} and copied to clipboard.`);
+  } else {
+    vscode.window.showInformationMessage(`DebugBrief saved to ${uri.fsPath}. Clipboard was left unchanged.`);
+  }
 }
 
-async function resolveInput({ input, fileName }: CreateBriefArgs): Promise<CreateBriefArgs> {
+async function resolveInput({
+  input,
+  fileName,
+  copyToClipboard
+}: CreateBriefArgs): Promise<CreateBriefArgs> {
   const pathCandidate = input.trim();
 
   if (!looksLikePath(pathCandidate)) {
-    return { input, fileName };
+    return { input, fileName, copyToClipboard };
   }
 
   const uri = resolvePathCandidate(pathCandidate);
 
   if (!uri) {
-    return { input, fileName };
+    return { input, fileName, copyToClipboard };
   }
 
   try {
     const stat = await vscode.workspace.fs.stat(uri);
 
     if (stat.type !== vscode.FileType.File) {
-      return { input, fileName };
+      return { input, fileName, copyToClipboard };
     }
 
     const bytes = await vscode.workspace.fs.readFile(uri);
     const content = new TextDecoder().decode(bytes).trim();
 
     if (!content) {
-      return { input, fileName };
+      return { input, fileName, copyToClipboard };
     }
 
     return {
       input: content,
-      fileName: uri.fsPath
+      fileName: uri.fsPath,
+      copyToClipboard
     };
   } catch {
-    return { input, fileName };
+    return { input, fileName, copyToClipboard };
   }
 }
 

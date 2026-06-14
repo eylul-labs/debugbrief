@@ -36,7 +36,8 @@ Current behavior:
   and `cargo test`
 - writes a Markdown debug brief to `.promptpack/debugbrief-*.md`
 - opens the generated brief in VS Code
-- copies the brief to the clipboard
+- copies the brief to the clipboard when using the selection command
+- leaves the clipboard unchanged when using the clipboard command
 
 ## Local VS Code Test
 
@@ -67,10 +68,9 @@ samples/typescript-build-failure.log
 Then run `DebugBrief: Create Debug Brief From Clipboard`; DebugBrief will read
 the file content instead of treating the path itself as the log.
 
-After generating a brief, DebugBrief copies the generated Markdown to the
-clipboard. To create another brief from a file path, copy the path again first.
-If the clipboard already contains a DebugBrief, the extension will warn instead
-of creating a nested brief.
+The selection command copies the generated Markdown to the clipboard. The
+clipboard command leaves the clipboard unchanged so repeated tests do not create
+nested DebugBrief output.
 
 ## Development
 
@@ -80,10 +80,10 @@ npm test
 npm run package
 ```
 
-`npm run package` creates:
+`npm run package` creates a versioned VSIX, for example:
 
 ```text
-debugbrief-0.0.1.vsix
+debugbrief-0.0.2.vsix
 ```
 
 The generated VSIX is ignored by git.
