@@ -56,7 +56,22 @@ type CreateBriefArgs = {
 };
 
 async function createBriefFromRawInput(args: CreateBriefArgs): Promise<void> {
+  if (looksLikeGeneratedDebugBrief(args.input)) {
+    vscode.window.showWarningMessage(
+      'Clipboard/selection already contains a DebugBrief. Copy the original error, log, or file path first.'
+    );
+    return;
+  }
+
   const resolved = await resolveInput(args);
+
+  if (looksLikeGeneratedDebugBrief(resolved.input)) {
+    vscode.window.showWarningMessage(
+      'The resolved input is already a DebugBrief. Choose the original error, log, or file path instead.'
+    );
+    return;
+  }
+
   await createBrief(resolved);
 }
 
@@ -138,6 +153,11 @@ function resolvePathCandidate(value: string): vscode.Uri | null {
 
   const normalized = value.replace(/^\.\//, '');
   return vscode.Uri.joinPath(workspaceFolder.uri, normalized);
+}
+
+function looksLikeGeneratedDebugBrief(value: string): boolean {
+  const trimmed = value.trimStart();
+  return trimmed.startsWith('# DebugBrief') && trimmed.includes('## Error Or Log Excerpt');
 }
 
 async function writeBrief(brief: string): Promise<vscode.Uri> {

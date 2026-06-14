@@ -47,3 +47,7 @@
   - selected or copied absolute paths can be read as file content
   - selected or copied relative `.log`, `.txt`, `.out`, `.err`, or `.md` paths
     are resolved under the active workspace
+- Manual retry exposed another UX issue: after a brief is created, the extension
+  copies the brief to the clipboard, so running the clipboard command again can
+  create a nested DebugBrief. Added guardrails that warn when clipboard or
+  selection already contains a generated DebugBrief.

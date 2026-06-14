@@ -67,6 +67,11 @@ samples/typescript-build-failure.log
 Then run `DebugBrief: Create Debug Brief From Clipboard`; DebugBrief will read
 the file content instead of treating the path itself as the log.
 
+After generating a brief, DebugBrief copies the generated Markdown to the
+clipboard. To create another brief from a file path, copy the path again first.
+If the clipboard already contains a DebugBrief, the extension will warn instead
+of creating a nested brief.
+
 ## Development
 
 ```bash
