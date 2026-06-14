@@ -35,3 +35,23 @@ test('builds a markdown debug brief', () => {
   assert.match(brief, /pytest tests\/test_app.py/);
   assert.match(brief, /Detected signals: python, test-failure/);
 });
+
+test('includes related source context', () => {
+  const brief = buildDebugBrief({
+    input: 'src/index.ts:14:19 - error TS2345',
+    fileName: 'build.log',
+    workspaceName: 'demo',
+    relatedFiles: [
+      {
+        path: 'src/index.ts',
+        language: 'typescript',
+        content: 'sendEmail(userId, subject)'
+      }
+    ],
+    generatedAt: new Date('2026-06-14T10:00:00.000Z')
+  });
+
+  assert.match(brief, /## Related Source Context/);
+  assert.match(brief, /### src\/index\.ts/);
+  assert.match(brief, /```typescript\nsendEmail/);
+});

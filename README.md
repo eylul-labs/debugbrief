@@ -1,26 +1,21 @@
-# PromptPack
+# DebugBrief
 
-Agent-operated microbusiness experiment owned by Serdar and operated by Eylul.
+Turn terminal errors, stack traces, and related source files into AI-ready
+debugging briefs.
 
-## Product Thesis
+## Why
 
-PromptPack is a VS Code extension for developers who use AI coding tools such as
-Codex, Cursor, Claude Code, and ChatGPT. It turns a repository, terminal error,
-or coding task into clean context packs and reusable prompts.
+AI coding tools are only as good as the context you give them. DebugBrief turns
+messy logs into structured Markdown briefs you can paste into Codex, Cursor,
+Claude Code, ChatGPT, or a bug report.
 
-The product starts as a local-first developer tool, then can grow into paid
-templates, team workflows, and hosted licensing.
-
-## Initial Positioning
-
-Stop pasting random files into AI. Generate clean repo context, debug briefs,
-and agent-ready prompts from VS Code.
+Instead of pasting random stack traces and hoping for the best, generate a clean
+debugging handoff with the failure, likely reproduction command, detected
+signals, and related source context.
 
 ## Current MVP
 
-The first product surface is `DebugBrief`.
-
-VS Code command:
+VS Code commands:
 
 ```text
 DebugBrief: Create Debug Brief From Selection
@@ -34,10 +29,28 @@ Current behavior:
 - detects basic language/framework/test signals
 - detects likely reproduction commands such as `npm test`, `pytest`, `go test`,
   and `cargo test`
+- resolves local source files mentioned in the error log when possible
 - writes a Markdown debug brief to `.promptpack/debugbrief-*.md`
 - opens the generated brief in VS Code
 - copies the brief to the clipboard when using the selection command
 - leaves the clipboard unchanged when using the clipboard command
+
+## Example
+
+Input:
+
+```text
+$ npm run build
+src/index.ts:14:19 - error TS2345: Argument of type 'number' is not assignable to parameter of type 'string'.
+```
+
+DebugBrief detects:
+
+```text
+Reproduction command: npm run build
+Signals: typescript, node, typescript-diagnostic
+Related source: src/index.ts
+```
 
 ## Local VS Code Test
 
@@ -83,7 +96,7 @@ npm run package
 `npm run package` creates a versioned VSIX, for example:
 
 ```text
-debugbrief-0.0.2.vsix
+debugbrief-0.0.3.vsix
 ```
 
 The generated VSIX is ignored by git.

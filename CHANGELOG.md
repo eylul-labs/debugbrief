@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.0.3
+
+- Attach related source context when DebugBrief can resolve file paths mentioned
+  in the error log.
+- Add fenced source snippets under `Related Source Context`.
+- Limit attached source context to a small local-first bundle.
+
 ## 0.0.2
 
 - Read copied or selected local file paths as log content.

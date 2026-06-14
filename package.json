@@ -1,8 +1,8 @@
 {
   "name": "debugbrief-vscode",
   "displayName": "DebugBrief",
-  "description": "Turn terminal errors and logs into AI-ready debugging briefs.",
-  "version": "0.0.2",
+  "description": "Turn terminal errors, stack traces, and related source files into AI-ready debugging briefs.",
+  "version": "0.0.3",
   "publisher": "serdar-ai",
   "private": true,
   "license": "UNLICENSED",

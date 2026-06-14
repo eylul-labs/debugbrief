@@ -2,13 +2,21 @@ export type DebugBriefInput = {
   input: string;
   fileName: string;
   workspaceName: string;
+  relatedFiles?: RelatedFile[];
   generatedAt?: Date;
+};
+
+export type RelatedFile = {
+  path: string;
+  language: string;
+  content: string;
 };
 
 export function buildDebugBrief({
   input,
   fileName,
   workspaceName,
+  relatedFiles = [],
   generatedAt = new Date()
 }: DebugBriefInput): string {
   const detected = detectSignals(input, fileName);
@@ -41,6 +49,8 @@ ${command ?? 'Unknown yet. Infer from the log if possible, otherwise ask for it.
 \`\`\`text
 ${excerpt}
 \`\`\`
+
+${formatRelatedFiles(relatedFiles)}
 
 ## Instructions For The AI Coding Agent
 
@@ -110,3 +120,24 @@ function fence(value: string): string {
   return value.replace(/```/g, "'''");
 }
 
+function formatRelatedFiles(files: RelatedFile[]): string {
+  if (files.length === 0) {
+    return `## Related Source Context
+
+No related source files were attached.
+`;
+  }
+
+  const sections = files.map((file) => {
+    return `### ${file.path}
+
+\`\`\`${file.language}
+${fence(file.content)}
+\`\`\``;
+  });
+
+  return `## Related Source Context
+
+${sections.join('\n\n')}
+`;
+}

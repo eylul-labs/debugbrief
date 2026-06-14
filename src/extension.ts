@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { buildDebugBrief } from './debugBrief';
+import { buildDebugBrief, RelatedFile } from './debugBrief';
 
 export function activate(context: vscode.ExtensionContext) {
   const fromSelection = vscode.commands.registerCommand(
@@ -80,10 +80,12 @@ async function createBriefFromRawInput(args: CreateBriefArgs): Promise<void> {
 
 async function createBrief({ input, fileName, copyToClipboard }: CreateBriefArgs): Promise<void> {
   const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
+  const relatedFiles = await readRelatedFiles(input);
   const brief = buildDebugBrief({
     input,
     fileName,
-    workspaceName: workspaceFolder?.name ?? 'Unknown workspace'
+    workspaceName: workspaceFolder?.name ?? 'Unknown workspace',
+    relatedFiles
   });
 
   const uri = await writeBrief(brief);
@@ -165,6 +167,105 @@ function resolvePathCandidate(value: string): vscode.Uri | null {
 
   const normalized = value.replace(/^\.\//, '');
   return vscode.Uri.joinPath(workspaceFolder.uri, normalized);
+}
+
+async function readRelatedFiles(input: string): Promise<RelatedFile[]> {
+  const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
+  if (!workspaceFolder) {
+    return [];
+  }
+
+  const candidates = extractPathCandidates(input);
+  const files: RelatedFile[] = [];
+
+  for (const candidate of candidates.slice(0, 4)) {
+    const uri = vscode.Uri.joinPath(workspaceFolder.uri, candidate);
+
+    try {
+      const stat = await vscode.workspace.fs.stat(uri);
+      if (stat.type !== vscode.FileType.File) {
+        continue;
+      }
+
+      const bytes = await vscode.workspace.fs.readFile(uri);
+      const content = new TextDecoder().decode(bytes).trim();
+
+      if (!content) {
+        continue;
+      }
+
+      files.push({
+        path: candidate,
+        language: languageForPath(candidate),
+        content: truncate(content, 12000)
+      });
+    } catch {
+      continue;
+    }
+  }
+
+  return files;
+}
+
+function extractPathCandidates(input: string): string[] {
+  const matches = input.matchAll(
+    /(?:^|\s|["'(\[])([A-Za-z0-9_./-]+\.(?:ts|tsx|js|jsx|py|go|rs|java|kt|rb|php|cs|cpp|c|h|hpp|swift|vue|svelte|json|yaml|yml|toml|md))(?::\d+)?(?::\d+)?/gm
+  );
+  const seen = new Set<string>();
+  const paths: string[] = [];
+
+  for (const match of matches) {
+    const value = match[1].replace(/^\.\//, '');
+    if (value.startsWith('/') || value.includes('node_modules/')) {
+      continue;
+    }
+    if (!seen.has(value)) {
+      seen.add(value);
+      paths.push(value);
+    }
+  }
+
+  return paths;
+}
+
+function languageForPath(path: string): string {
+  const extension = path.split('.').pop()?.toLowerCase();
+  const languages: Record<string, string> = {
+    c: 'c',
+    cpp: 'cpp',
+    cs: 'csharp',
+    go: 'go',
+    h: 'c',
+    hpp: 'cpp',
+    java: 'java',
+    js: 'javascript',
+    jsx: 'jsx',
+    json: 'json',
+    kt: 'kotlin',
+    md: 'markdown',
+    php: 'php',
+    py: 'python',
+    rb: 'ruby',
+    rs: 'rust',
+    svelte: 'svelte',
+    swift: 'swift',
+    toml: 'toml',
+    ts: 'typescript',
+    tsx: 'tsx',
+    vue: 'vue',
+    yaml: 'yaml',
+    yml: 'yaml'
+  };
+
+  return extension ? languages[extension] ?? '' : '';
+}
+
+function truncate(value: string, maxLength: number): string {
+  if (value.length <= maxLength) {
+    return value;
+  }
+
+  return `${value.slice(0, maxLength)}\n\n... truncated by DebugBrief ...`;
 }
 
 function looksLikeGeneratedDebugBrief(value: string): boolean {

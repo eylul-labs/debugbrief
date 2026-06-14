@@ -55,3 +55,8 @@
 - Changed clipboard command so it does not overwrite the clipboard with the
   generated brief. This prevents accidental repeated nested brief generation
   during the clipboard-path workflow.
+- Added `0.0.3` related source context:
+  - DebugBrief extracts local source file paths mentioned in logs
+  - reads up to four matching workspace files
+  - includes snippets under `Related Source Context`
+  - updated English README positioning and created a VS Code Marketplace draft
