@@ -1,0 +1,15 @@
+.gitignore
+.git/**
+.vscode/**
+.vscode-test/**
+node_modules/**
+src/**
+test/**
+research/**
+docs/**
+samples/**
+*.vsix
+tsconfig.json
+package-lock.json
+.promptpack/**
+**/.promptpack/**

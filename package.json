@@ -5,6 +5,7 @@
   "version": "0.0.1",
   "publisher": "serdar-ai",
   "private": true,
+  "license": "UNLICENSED",
   "engines": {
     "vscode": "^1.95.0"
   },
@@ -30,6 +31,7 @@
   },
   "scripts": {
     "compile": "tsc -p ./",
+    "package": "vsce package --out debugbrief-0.0.1.vsix",
     "test": "npm run compile && node --test test/*.test.js",
     "watch": "tsc -watch -p ./",
     "vscode:prepublish": "npm run compile"
@@ -37,6 +39,7 @@
   "devDependencies": {
     "@types/node": "^24.0.0",
     "@types/vscode": "^1.95.0",
+    "@vscode/vsce": "^3.9.2",
     "typescript": "^5.8.0"
   }
 }

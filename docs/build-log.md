@@ -32,3 +32,11 @@
   `test-failure`, and `pytest tests/test_price.py`.
 - Adjusted launch config to open the project root instead of the `samples`
   folder so generated briefs use the project workspace.
+- Added VSIX packaging:
+  - installed `@vscode/vsce`
+  - added `npm run package`
+  - added `.vscodeignore`
+  - added proprietary early-development `LICENSE`
+  - generated `debugbrief-0.0.1.vsix`
+  - remaining package warning: missing repository field, intentionally deferred
+    until a public/private remote repository decision is made

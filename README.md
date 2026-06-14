@@ -62,7 +62,16 @@ Current behavior:
 ```bash
 npm install
 npm test
+npm run package
 ```
+
+`npm run package` creates:
+
+```text
+debugbrief-0.0.1.vsix
+```
+
+The generated VSIX is ignored by git.
 
 ## Ownership Model
 
