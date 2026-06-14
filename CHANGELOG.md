@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.6
+
+- Remove private package flag for future marketplace publishing.
+- Add GitHub Actions CI workflow.
+- Add release checklist for repository and marketplace steps.
+
 ## 0.0.5
 
 - Add generated DebugBrief marketplace icon.

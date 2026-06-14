@@ -69,3 +69,7 @@
   - generated local marketplace icon
   - added SVG source and PNG package icon
   - added visual asset and demo GIF checklist
+- Prepared `0.0.6` release readiness:
+  - removed private package flag for future marketplace publishing
+  - added GitHub Actions CI workflow
+  - added release checklist for repository and marketplace steps

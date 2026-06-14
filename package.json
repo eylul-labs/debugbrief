@@ -2,9 +2,8 @@
   "name": "debugbrief-vscode",
   "displayName": "DebugBrief",
   "description": "Turn terminal errors, stack traces, and related source files into AI-ready debugging briefs.",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "publisher": "serdar-ai",
-  "private": true,
   "license": "MIT",
   "repository": {
     "type": "git",
