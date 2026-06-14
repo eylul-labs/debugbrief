@@ -7,7 +7,7 @@
 - Install the generated VSIX with:
 
   ```bash
-  code --install-extension debugbrief-0.0.7.vsix --force
+  code --install-extension debugbrief-0.0.8.vsix --force
   ```
 
 - Confirm the installed version:

@@ -2,7 +2,7 @@
   "name": "debugbrief-vscode",
   "displayName": "DebugBrief",
   "description": "Turn terminal errors, stack traces, and related source files into AI-ready debugging briefs.",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "publisher": "eylul-labs",
   "license": "MIT",
   "repository": {

@@ -62,7 +62,7 @@ Related source: src/index.ts
 1. Open this folder in VS Code:
 
    ```bash
-   code /home/serdar/AI-products/promptpack
+   code debugbrief
    ```
 
 2. Press `F5` and choose `Run DebugBrief Extension`.
@@ -101,7 +101,7 @@ npm run package
 `npm run package` creates a versioned VSIX, for example:
 
 ```text
-debugbrief-0.0.7.vsix
+debugbrief-0.0.8.vsix
 ```
 
 The generated VSIX is ignored by git.

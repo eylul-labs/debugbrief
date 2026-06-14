@@ -9,11 +9,10 @@ function sendEmail(email: string, subject: string): void {
 
 const user: User = {
   id: 42,
-  email: "serdar@example.com"
+  email: "user@example.com"
 };
 
 const userId = user.id;
 const subject = "Welcome";
 
 sendEmail(userId, subject);
-

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.8
+
+- Remove local machine-specific paths from public documentation.
+
 ## 0.0.7
 
 - Move package metadata to the `eylul-labs` GitHub/Marketplace namespace.
