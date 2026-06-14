@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.7
+
+- Move package metadata to the `eylul-labs` GitHub/Marketplace namespace.
+
 ## 0.0.6
 
 - Remove private package flag for future marketplace publishing.

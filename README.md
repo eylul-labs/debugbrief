@@ -101,7 +101,7 @@ npm run package
 `npm run package` creates a versioned VSIX, for example:
 
 ```text
-debugbrief-0.0.6.vsix
+debugbrief-0.0.7.vsix
 ```
 
 The generated VSIX is ignored by git.

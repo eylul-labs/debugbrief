@@ -2,16 +2,16 @@
   "name": "debugbrief-vscode",
   "displayName": "DebugBrief",
   "description": "Turn terminal errors, stack traces, and related source files into AI-ready debugging briefs.",
-  "version": "0.0.6",
-  "publisher": "serdar-ai",
+  "version": "0.0.7",
+  "publisher": "eylul-labs",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/serdar-ai/debugbrief.git"
+    "url": "https://github.com/eylul-labs/debugbrief.git"
   },
-  "homepage": "https://github.com/serdar-ai/debugbrief#readme",
+  "homepage": "https://github.com/eylul-labs/debugbrief#readme",
   "bugs": {
-    "url": "https://github.com/serdar-ai/debugbrief/issues"
+    "url": "https://github.com/eylul-labs/debugbrief/issues"
   },
   "engines": {
     "vscode": "^1.95.0"

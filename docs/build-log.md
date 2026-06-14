@@ -74,3 +74,5 @@
   - added release checklist for repository and marketplace steps
 - GitHub Actions is currently unavailable because the GitHub account is locked
   due to a billing issue, so CI workflow publishing is deferred.
+- Prepared `0.0.7` namespace move:
+  - changed package publisher and GitHub URLs to `eylul-labs`
