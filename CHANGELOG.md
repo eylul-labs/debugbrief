@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.5
+
+- Add generated DebugBrief marketplace icon.
+- Add visual asset and demo checklist.
+
 ## 0.0.4
 
 - Switch package license metadata and LICENSE file to MIT.

@@ -2,7 +2,7 @@
   "name": "debugbrief-vscode",
   "displayName": "DebugBrief",
   "description": "Turn terminal errors, stack traces, and related source files into AI-ready debugging briefs.",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "publisher": "serdar-ai",
   "private": true,
   "license": "MIT",
@@ -38,6 +38,7 @@
     "color": "#0B1020",
     "theme": "dark"
   },
+  "icon": "assets/icon.png",
   "activationEvents": [
     "onCommand:debugbrief.createFromSelection",
     "onCommand:debugbrief.createFromClipboard"
@@ -57,6 +58,7 @@
   },
   "scripts": {
     "compile": "tsc -p ./",
+    "generate:icon": "python3 scripts/generate_icon.py",
     "package": "vsce package --out debugbrief-$npm_package_version.vsix",
     "test": "npm run compile && node --test test/*.test.js",
     "watch": "tsc -watch -p ./",

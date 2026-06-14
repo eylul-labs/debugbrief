@@ -9,6 +9,8 @@ marketing/**
 research/**
 docs/**
 samples/**
+scripts/**
+assets/*.svg
 *.vsix
 tsconfig.json
 package-lock.json

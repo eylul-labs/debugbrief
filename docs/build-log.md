@@ -65,3 +65,7 @@
   - package keywords, repository, homepage, bugs, and gallery banner
   - SUPPORT.md
   - README cleanup for public-facing Marketplace page
+- Prepared `0.0.5` visual assets:
+  - generated local marketplace icon
+  - added SVG source and PNG package icon
+  - added visual asset and demo GIF checklist
