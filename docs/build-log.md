@@ -40,3 +40,10 @@
   - generated `debugbrief-0.0.1.vsix`
   - remaining package warning: missing repository field, intentionally deferred
     until a public/private remote repository decision is made
+- Manual clipboard test exposed a useful MVP gap: copying
+  `samples/typescript-build-failure.log` produced a brief about the path string
+  instead of the file contents.
+- Added path-aware input resolution:
+  - selected or copied absolute paths can be read as file content
+  - selected or copied relative `.log`, `.txt`, `.out`, `.err`, or `.md` paths
+    are resolved under the active workspace

@@ -19,7 +19,7 @@ export function activate(context: vscode.ExtensionContext) {
         return;
       }
 
-      await createBrief({
+      await createBriefFromRawInput({
         input: selectedText,
         fileName: editor.document.fileName
       });
@@ -36,7 +36,7 @@ export function activate(context: vscode.ExtensionContext) {
         return;
       }
 
-      await createBrief({
+      await createBriefFromRawInput({
         input: clipboardText,
         fileName: 'clipboard'
       });
@@ -55,6 +55,11 @@ type CreateBriefArgs = {
   fileName: string;
 };
 
+async function createBriefFromRawInput(args: CreateBriefArgs): Promise<void> {
+  const resolved = await resolveInput(args);
+  await createBrief(resolved);
+}
+
 async function createBrief({ input, fileName }: CreateBriefArgs): Promise<void> {
   const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
   const brief = buildDebugBrief({
@@ -69,6 +74,70 @@ async function createBrief({ input, fileName }: CreateBriefArgs): Promise<void> 
   await vscode.window.showTextDocument(doc, { preview: false });
   await vscode.env.clipboard.writeText(brief);
   vscode.window.showInformationMessage(`DebugBrief saved to ${uri.fsPath} and copied to clipboard.`);
+}
+
+async function resolveInput({ input, fileName }: CreateBriefArgs): Promise<CreateBriefArgs> {
+  const pathCandidate = input.trim();
+
+  if (!looksLikePath(pathCandidate)) {
+    return { input, fileName };
+  }
+
+  const uri = resolvePathCandidate(pathCandidate);
+
+  if (!uri) {
+    return { input, fileName };
+  }
+
+  try {
+    const stat = await vscode.workspace.fs.stat(uri);
+
+    if (stat.type !== vscode.FileType.File) {
+      return { input, fileName };
+    }
+
+    const bytes = await vscode.workspace.fs.readFile(uri);
+    const content = new TextDecoder().decode(bytes).trim();
+
+    if (!content) {
+      return { input, fileName };
+    }
+
+    return {
+      input: content,
+      fileName: uri.fsPath
+    };
+  } catch {
+    return { input, fileName };
+  }
+}
+
+function looksLikePath(value: string): boolean {
+  if (value.includes('\n')) {
+    return false;
+  }
+
+  return (
+    value.startsWith('/') ||
+    value.startsWith('./') ||
+    value.startsWith('../') ||
+    /\.(log|txt|out|err|md)$/i.test(value)
+  );
+}
+
+function resolvePathCandidate(value: string): vscode.Uri | null {
+  if (value.startsWith('/')) {
+    return vscode.Uri.file(value);
+  }
+
+  const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
+
+  if (!workspaceFolder) {
+    return null;
+  }
+
+  const normalized = value.replace(/^\.\//, '');
+  return vscode.Uri.joinPath(workspaceFolder.uri, normalized);
 }
 
 async function writeBrief(brief: string): Promise<vscode.Uri> {

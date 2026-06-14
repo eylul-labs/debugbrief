@@ -30,6 +30,7 @@ DebugBrief: Create Debug Brief From Clipboard
 Current behavior:
 
 - reads selected error/log text from the active editor
+- reads a selected or copied file path when it points to a local log/text file
 - detects basic language/framework/test signals
 - detects likely reproduction commands such as `npm test`, `pytest`, `go test`,
   and `cargo test`
@@ -56,6 +57,15 @@ Current behavior:
 4. Select the log text.
 5. Run `DebugBrief: Create Debug Brief From Selection`.
 6. Confirm that a Markdown file appears under `.promptpack/`.
+
+You can also copy a path such as:
+
+```text
+samples/typescript-build-failure.log
+```
+
+Then run `DebugBrief: Create Debug Brief From Clipboard`; DebugBrief will read
+the file content instead of treating the path itself as the log.
 
 ## Development
 
