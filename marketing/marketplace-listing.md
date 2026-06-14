@@ -39,6 +39,6 @@ Claude Code, ChatGPT, repo context, VS Code
 
 - Add screenshots or a short GIF.
 - Add a real icon.
-- Decide public/private repository URL.
-- Decide final license before publishing.
-
+- Create or confirm the public repository URL:
+  `https://github.com/serdar-ai/debugbrief`
+- Confirm the `serdar-ai` VS Code Marketplace publisher.

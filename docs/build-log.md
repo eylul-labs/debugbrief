@@ -60,3 +60,8 @@
   - reads up to four matching workspace files
   - includes snippets under `Related Source Context`
   - updated English README positioning and created a VS Code Marketplace draft
+- Prepared `0.0.4` marketplace metadata:
+  - MIT license
+  - package keywords, repository, homepage, bugs, and gallery banner
+  - SUPPORT.md
+  - README cleanup for public-facing Marketplace page

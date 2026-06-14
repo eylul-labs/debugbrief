@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.0.4
+
+- Switch package license metadata and LICENSE file to MIT.
+- Add marketplace metadata: keywords, repository, homepage, bugs, and gallery
+  banner.
+- Add SUPPORT.md.
+- Clean README for marketplace-readiness.
+
 ## 0.0.3
 
 - Attach related source context when DebugBrief can resolve file paths mentioned

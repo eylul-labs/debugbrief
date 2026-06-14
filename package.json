@@ -2,16 +2,42 @@
   "name": "debugbrief-vscode",
   "displayName": "DebugBrief",
   "description": "Turn terminal errors, stack traces, and related source files into AI-ready debugging briefs.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "publisher": "serdar-ai",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/serdar-ai/debugbrief.git"
+  },
+  "homepage": "https://github.com/serdar-ai/debugbrief#readme",
+  "bugs": {
+    "url": "https://github.com/serdar-ai/debugbrief/issues"
+  },
   "engines": {
     "vscode": "^1.95.0"
   },
   "categories": [
+    "Debuggers",
     "Other"
   ],
+  "keywords": [
+    "ai",
+    "debugging",
+    "debug",
+    "prompt",
+    "stack-trace",
+    "terminal",
+    "errors",
+    "codex",
+    "cursor",
+    "claude",
+    "chatgpt"
+  ],
+  "galleryBanner": {
+    "color": "#0B1020",
+    "theme": "dark"
+  },
   "activationEvents": [
     "onCommand:debugbrief.createFromSelection",
     "onCommand:debugbrief.createFromClipboard"

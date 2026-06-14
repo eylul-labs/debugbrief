@@ -13,7 +13,7 @@ Instead of pasting random stack traces and hoping for the best, generate a clean
 debugging handoff with the failure, likely reproduction command, detected
 signals, and related source context.
 
-## Current MVP
+## Features
 
 VS Code commands:
 
@@ -21,8 +21,6 @@ VS Code commands:
 DebugBrief: Create Debug Brief From Selection
 DebugBrief: Create Debug Brief From Clipboard
 ```
-
-Current behavior:
 
 - reads selected error/log text from the active editor
 - reads a selected or copied file path when it points to a local log/text file
@@ -34,6 +32,13 @@ Current behavior:
 - opens the generated brief in VS Code
 - copies the brief to the clipboard when using the selection command
 - leaves the clipboard unchanged when using the clipboard command
+
+## Commands
+
+```text
+DebugBrief: Create Debug Brief From Selection
+DebugBrief: Create Debug Brief From Clipboard
+```
 
 ## Example
 
@@ -101,15 +106,6 @@ debugbrief-0.0.3.vsix
 
 The generated VSIX is ignored by git.
 
-## Ownership Model
+## License
 
-- Company, payment accounts, legal ownership: Serdar.
-- Product strategy, implementation, docs, marketing preparation, release
-  operations, support drafts, and growth workflows: Eylul.
-- External/public actions such as publishing, posting, customer outreach, and ad
-  spend require Serdar approval before execution.
-
-## Workboard
-
-- Card: `ab89b2b1-8d6c-4b4a-9084-e85795e46c7c`
-- Title: `Agent-operated AI coding product: PromptPack for VS Code`
+MIT
