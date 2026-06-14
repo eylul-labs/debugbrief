@@ -27,3 +27,8 @@
   - sample pytest and TypeScript failure logs under `samples/`
   - README instructions for local extension testing with `F5`
   - verified again with `npm test`
+- First manual MVP test succeeded from VS Code Extension Development Host using
+  `samples/python-pytest-failure.log`. DebugBrief detected `python`,
+  `test-failure`, and `pytest tests/test_price.py`.
+- Adjusted launch config to open the project root instead of the `samples`
+  folder so generated briefs use the project workspace.
