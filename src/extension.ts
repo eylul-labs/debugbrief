@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { buildDebugBrief } from './debugBrief';
 
 export function activate(context: vscode.ExtensionContext) {
   const disposable = vscode.commands.registerCommand(
@@ -25,14 +26,12 @@ export function activate(context: vscode.ExtensionContext) {
         workspaceName: workspaceFolder?.name ?? 'Unknown workspace'
       });
 
-      const doc = await vscode.workspace.openTextDocument({
-        content: brief,
-        language: 'markdown'
-      });
+      const uri = await writeBrief(brief);
+      const doc = await vscode.workspace.openTextDocument(uri);
 
       await vscode.window.showTextDocument(doc, { preview: false });
       await vscode.env.clipboard.writeText(brief);
-      vscode.window.showInformationMessage('DebugBrief created and copied to clipboard.');
+      vscode.window.showInformationMessage(`DebugBrief saved to ${uri.fsPath} and copied to clipboard.`);
     }
   );
 
@@ -43,72 +42,27 @@ export function deactivate() {
   // No cleanup needed yet.
 }
 
-type DebugBriefInput = {
-  input: string;
-  fileName: string;
-  workspaceName: string;
-};
+async function writeBrief(brief: string): Promise<vscode.Uri> {
+  const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
 
-function buildDebugBrief({ input, fileName, workspaceName }: DebugBriefInput): string {
-  const detected = detectSignals(input, fileName);
-  const excerpt = fence(input);
+  if (!workspaceFolder) {
+    const doc = await vscode.workspace.openTextDocument({
+      content: brief,
+      language: 'markdown'
+    });
+    return doc.uri;
+  }
 
-  return `# DebugBrief
+  const directory = vscode.Uri.joinPath(workspaceFolder.uri, '.promptpack');
+  await vscode.workspace.fs.createDirectory(directory);
 
-## Goal
+  const filename = `debugbrief-${timestamp()}.md`;
+  const uri = vscode.Uri.joinPath(directory, filename);
+  await vscode.workspace.fs.writeFile(uri, new TextEncoder().encode(brief));
 
-Fix the failure below. Explain the likely root cause, propose the smallest safe
-change, and include verification steps.
-
-## Workspace
-
-- Workspace: ${workspaceName}
-- Source file/log: ${fileName}
-- Detected signals: ${detected.join(', ') || 'none yet'}
-
-## Error Or Log Excerpt
-
-\`\`\`text
-${excerpt}
-\`\`\`
-
-## Instructions For The AI Coding Agent
-
-1. Identify the likely failing component.
-2. Ask for missing context only if required.
-3. Prefer a minimal fix over broad refactors.
-4. Include the exact test or command to verify the fix.
-5. Mention any risk, migration, or compatibility concern.
-
-## Reproduction Command
-
-Unknown yet. Infer from the log if possible, otherwise ask for it.
-
-## Notes
-
-- Do not assume unrelated files are safe to edit.
-- Preserve existing user changes.
-- If this is a test failure, start from the assertion and stack trace.
-`;
+  return uri;
 }
 
-function detectSignals(input: string, fileName: string): string[] {
-  const text = `${fileName}\n${input}`.toLowerCase();
-  const signals: string[] = [];
-
-  if (text.includes('pytest') || text.includes('traceback')) signals.push('python');
-  if (text.includes('typescript') || text.includes('tsc') || text.includes('.ts')) signals.push('typescript');
-  if (text.includes('jest') || text.includes('vitest')) signals.push('javascript-test');
-  if (text.includes('npm ') || text.includes('node_modules')) signals.push('node');
-  if (text.includes('cargo') || text.includes('rustc')) signals.push('rust');
-  if (text.includes('go test') || text.includes('panic:')) signals.push('go');
-  if (text.includes('stack trace') || text.includes('exception')) signals.push('exception');
-  if (text.includes('assert') || text.includes('expected') || text.includes('received')) signals.push('test-failure');
-
-  return [...new Set(signals)];
+function timestamp(): string {
+  return new Date().toISOString().replace(/[:.]/g, '-');
 }
-
-function fence(value: string): string {
-  return value.replace(/```/g, "'''");
-}
-

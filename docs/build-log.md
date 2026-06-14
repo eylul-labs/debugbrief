@@ -14,4 +14,10 @@
   `DebugBrief: Create Debug Brief From Selection`
 - Installed dependencies with `npm install`
 - Verified TypeScript build with `npm run compile`
-
+- Continued MVP implementation:
+  - moved DebugBrief generation into `src/debugBrief.ts`
+  - added `.promptpack/debugbrief-*.md` file output from the VS Code command
+  - added basic reproduction command detection
+  - added Node tests for signal detection, command detection, and Markdown brief
+    generation
+  - verified with `npm test`

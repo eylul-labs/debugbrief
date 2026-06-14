@@ -16,6 +16,33 @@ templates, team workflows, and hosted licensing.
 Stop pasting random files into AI. Generate clean repo context, debug briefs,
 and agent-ready prompts from VS Code.
 
+## Current MVP
+
+The first product surface is `DebugBrief`.
+
+VS Code command:
+
+```text
+DebugBrief: Create Debug Brief From Selection
+```
+
+Current behavior:
+
+- reads selected error/log text from the active editor
+- detects basic language/framework/test signals
+- detects likely reproduction commands such as `npm test`, `pytest`, `go test`,
+  and `cargo test`
+- writes a Markdown debug brief to `.promptpack/debugbrief-*.md`
+- opens the generated brief in VS Code
+- copies the brief to the clipboard
+
+## Development
+
+```bash
+npm install
+npm test
+```
+
 ## Ownership Model
 
 - Company, payment accounts, legal ownership: Serdar.
@@ -28,4 +55,3 @@ and agent-ready prompts from VS Code.
 
 - Card: `ab89b2b1-8d6c-4b4a-9084-e85795e46c7c`
 - Title: `Agent-operated AI coding product: PromptPack for VS Code`
-

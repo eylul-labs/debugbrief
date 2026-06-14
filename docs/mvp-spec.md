@@ -17,10 +17,12 @@ Turn terminal errors into AI-ready debugging briefs from VS Code.
    - short summary placeholder
    - raw error/log excerpt
    - suspected language/framework
-   - repro command placeholder
+   - detected repro command when available
    - useful AI debugging instructions
    - next steps checklist
-4. Developer can copy the brief into Codex, Cursor, Claude Code, ChatGPT, or a
+4. Extension saves the brief to `.promptpack/debugbrief-*.md` and copies it to
+   the clipboard.
+5. Developer can copy the brief into Codex, Cursor, Claude Code, ChatGPT, or a
    bug report.
 
 ## Non-Goals For MVP
@@ -37,4 +39,4 @@ Turn terminal errors into AI-ready debugging briefs from VS Code.
 - Command appears in VS Code command palette
 - Selected text becomes a usable Markdown debug brief
 - Generated brief is saved locally and opened in an editor tab
-
+- Brief builder has basic unit test coverage
