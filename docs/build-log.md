@@ -71,5 +71,6 @@
   - added visual asset and demo GIF checklist
 - Prepared `0.0.6` release readiness:
   - removed private package flag for future marketplace publishing
-  - added GitHub Actions CI workflow
   - added release checklist for repository and marketplace steps
+- GitHub Actions is currently unavailable because the GitHub account is locked
+  due to a billing issue, so CI workflow publishing is deferred.

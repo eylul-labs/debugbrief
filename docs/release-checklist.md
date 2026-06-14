@@ -20,7 +20,7 @@
 
 - Create the GitHub repository at `https://github.com/serdar-ai/debugbrief`.
 - Push the local `main` branch.
-- Confirm the CI workflow passes.
+- If GitHub Actions is available, add/enable CI and confirm it passes.
 - Add screenshots or a demo GIF to the README or Marketplace listing.
 
 ## Marketplace
