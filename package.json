@@ -59,6 +59,7 @@
     "compile": "tsc -p ./",
     "generate:icon": "python3 scripts/generate_icon.py",
     "package": "vsce package --out debugbrief-$npm_package_version.vsix",
+    "preflight": "npm test && npm run package -- --no-dependencies",
     "test": "npm run compile && node --test test/*.test.js",
     "watch": "tsc -watch -p ./",
     "vscode:prepublish": "npm run compile"

@@ -4,6 +4,7 @@
 
 - Run `npm test`.
 - Run `npm run package`.
+- Or run both with `npm run preflight`.
 - Install the generated VSIX with:
 
   ```bash
