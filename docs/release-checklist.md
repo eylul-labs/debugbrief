@@ -19,8 +19,9 @@
 
 ## Repository
 
-- Create the GitHub repository at `https://github.com/eylul-labs/debugbrief`.
-- Push the local `main` branch.
+- Confirm the GitHub repository is available at
+  `https://github.com/eylul-labs/debugbrief`.
+- Confirm the local `main` branch is pushed to `origin/main`.
 - If GitHub Actions is available, add/enable CI and confirm it passes.
 - Add screenshots or a demo GIF to the README or Marketplace listing.
 

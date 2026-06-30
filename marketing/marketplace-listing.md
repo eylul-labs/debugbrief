@@ -38,6 +38,6 @@ Claude Code, ChatGPT, repo context, VS Code
 ## Notes Before Publishing
 
 - Add screenshots or a short GIF.
-- Create or confirm the public repository URL:
+- Confirm the public repository URL:
   `https://github.com/eylul-labs/debugbrief`
 - Confirm the `eylul-labs` VS Code Marketplace publisher.
