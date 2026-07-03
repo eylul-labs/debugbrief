@@ -98,10 +98,10 @@ npm test
 npm run package
 ```
 
-`npm run package` creates a versioned VSIX, for example:
+`npm run package` creates a versioned VSIX named from `package.json`:
 
-```text
-debugbrief-0.0.8.vsix
+```bash
+debugbrief-$(node -p 'require("./package.json").version').vsix
 ```
 
 The generated VSIX is ignored by git.
