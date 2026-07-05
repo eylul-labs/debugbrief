@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.9
+
+- Align the VS Code extension identifier with the DebugBrief product name.
+- Clarify local VS Code launch instructions.
+
 ## 0.0.8
 
 - Remove local machine-specific paths from public documentation.

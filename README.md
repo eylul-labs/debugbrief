@@ -62,7 +62,7 @@ Related source: src/index.ts
 1. Open this folder in VS Code:
 
    ```bash
-   code debugbrief
+   code .
    ```
 
 2. Press `F5` and choose `Run DebugBrief Extension`.

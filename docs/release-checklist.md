@@ -27,7 +27,7 @@
 
 ## Marketplace
 
-- Confirm the VS Code Marketplace publisher id is `eylul-labs`.
+- Confirm the VS Code Marketplace extension id is `eylul-labs.debugbrief`.
 - Create or refresh the Marketplace access token.
 - Publish with `vsce publish` after the publisher and token are ready.
 - Verify the Marketplace page title, description, icon, license, and support link.
