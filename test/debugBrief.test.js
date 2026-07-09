@@ -15,6 +15,30 @@ Expected true to be false
   assert.equal(command, 'npm test');
 });
 
+test('detects direct tool reproduction commands', () => {
+  assert.equal(
+    detectReproductionCommand(`
+tsc --noEmit
+src/index.ts:14:19 - error TS2345
+`),
+    'tsc --noEmit'
+  );
+  assert.equal(
+    detectReproductionCommand(`
+vitest run test/debugBrief.test.js
+Expected true to be false
+`),
+    'vitest run test/debugBrief.test.js'
+  );
+  assert.equal(
+    detectReproductionCommand(`
+mypy src
+error: Argument 1 has incompatible type
+`),
+    'mypy src'
+  );
+});
+
 test('detects TypeScript and test signals', () => {
   const signals = detectSignals('error TS2345: expected string received number', 'src/index.ts');
 

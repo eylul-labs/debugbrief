@@ -98,8 +98,10 @@ export function detectReproductionCommand(input: string): string | null {
   const commandPatterns = [
     /^(npm|pnpm|yarn|bun)\s+(run\s+)?(test|build|lint|typecheck|check)\b.*$/,
     /^npx\s+(jest|vitest|tsc|eslint)\b.*$/,
+    /^(jest|vitest|tsc|eslint)\b.*$/,
     /^pytest\b.*$/,
     /^python\s+-m\s+pytest\b.*$/,
+    /^(ruff|mypy)\b.*$/,
     /^go\s+test\b.*$/,
     /^cargo\s+(test|build|check)\b.*$/,
     /^dotnet\s+test\b.*$/

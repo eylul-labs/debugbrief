@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.10
+
+- Detect direct `tsc`, `vitest`, `jest`, `eslint`, `ruff`, and `mypy`
+  reproduction commands in pasted logs.
+
 ## 0.0.9
 
 - Align the VS Code extension identifier with the DebugBrief product name.
