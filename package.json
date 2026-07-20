@@ -2,7 +2,7 @@
   "name": "debugbrief",
   "displayName": "DebugBrief",
   "description": "Turn terminal errors, stack traces, and related source files into AI-ready debugging briefs.",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "publisher": "eylul-labs",
   "license": "MIT",
   "repository": {

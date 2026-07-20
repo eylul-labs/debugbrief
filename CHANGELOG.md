@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.11
+
+- Detect package-manager-wrapped reproduction commands such as
+  `pnpm exec vitest`, `uv run pytest`, and `poetry run mypy`.
+
 ## 0.0.10
 
 - Detect direct `tsc`, `vitest`, `jest`, `eslint`, `ruff`, and `mypy`

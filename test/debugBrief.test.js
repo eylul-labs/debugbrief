@@ -39,6 +39,30 @@ error: Argument 1 has incompatible type
   );
 });
 
+test('detects package manager wrapped reproduction commands', () => {
+  assert.equal(
+    detectReproductionCommand(`
+pnpm exec vitest run test/debugBrief.test.js
+Expected true to be false
+`),
+    'pnpm exec vitest run test/debugBrief.test.js'
+  );
+  assert.equal(
+    detectReproductionCommand(`
+uv run pytest tests/test_app.py
+AssertionError: expected 2 got 3
+`),
+    'uv run pytest tests/test_app.py'
+  );
+  assert.equal(
+    detectReproductionCommand(`
+poetry run mypy src
+error: Argument 1 has incompatible type
+`),
+    'poetry run mypy src'
+  );
+});
+
 test('detects TypeScript and test signals', () => {
   const signals = detectSignals('error TS2345: expected string received number', 'src/index.ts');
 
