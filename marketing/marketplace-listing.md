@@ -30,6 +30,10 @@ report.
 - `DebugBrief: Create Debug Brief From Selection`
 - `DebugBrief: Create Debug Brief From Clipboard`
 
+## Support
+
+Report issues at `https://github.com/eylul-labs/debugbrief/issues`.
+
 ## Keywords
 
 AI debugging, prompt, stack trace, build failure, test failure, Codex, Cursor,
