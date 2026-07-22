@@ -102,10 +102,9 @@ export function detectReproductionCommand(input: string): string | null {
     /^npx\s+(jest|vitest|tsc|eslint)\b.*$/,
     /^(jest|vitest|tsc|eslint)\b.*$/,
     /^pytest\b.*$/,
-    /^python\s+-m\s+pytest\b.*$/,
-    /^(uv|poetry)\s+run\s+pytest\b.*$/,
+    /^python\s+-m\s+(pytest|ruff|mypy)\b.*$/,
+    /^(uv|poetry|pipenv)\s+run\s+(pytest|ruff|mypy)\b.*$/,
     /^(ruff|mypy)\b.*$/,
-    /^(uv|poetry)\s+run\s+(ruff|mypy)\b.*$/,
     /^go\s+test\b.*$/,
     /^cargo\s+(test|build|check)\b.*$/,
     /^dotnet\s+test\b.*$/

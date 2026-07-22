@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.12
+
+- Detect Python wrapper reproduction commands such as `python -m mypy`,
+  `pipenv run ruff check`, and other `uv`/`poetry`/`pipenv` pytest, ruff, and
+  mypy invocations.
+
 ## 0.0.11
 
 - Detect package-manager-wrapped reproduction commands such as

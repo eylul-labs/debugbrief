@@ -61,6 +61,20 @@ error: Argument 1 has incompatible type
 `),
     'poetry run mypy src'
   );
+  assert.equal(
+    detectReproductionCommand(`
+pipenv run ruff check src
+F401 imported but unused
+`),
+    'pipenv run ruff check src'
+  );
+  assert.equal(
+    detectReproductionCommand(`
+python -m mypy src
+error: Argument 1 has incompatible type
+`),
+    'python -m mypy src'
+  );
 });
 
 test('detects TypeScript and test signals', () => {
