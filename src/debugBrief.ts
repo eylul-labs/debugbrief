@@ -82,7 +82,9 @@ export function detectSignals(input: string, fileName: string): string[] {
 
   if (text.includes('pytest') || text.includes('traceback')) signals.push('python');
   if (text.includes('typescript') || text.includes('tsc') || text.includes('.ts')) signals.push('typescript');
-  if (text.includes('jest') || text.includes('vitest')) signals.push('javascript-test');
+  if (text.includes('jest') || text.includes('vitest') || text.includes('node --test')) {
+    signals.push('javascript-test');
+  }
   if (text.includes('npm ') || text.includes('node_modules')) signals.push('node');
   if (text.includes('cargo') || text.includes('rustc')) signals.push('rust');
   if (text.includes('go test') || text.includes('panic:')) signals.push('go');
@@ -100,6 +102,7 @@ export function detectReproductionCommand(input: string): string | null {
     /^(npm|pnpm|yarn|bun)\s+exec\s+(jest|vitest|tsc|eslint)\b.*$/,
     /^(pnpm|yarn|bun)\s+(jest|vitest|tsc|eslint)\b.*$/,
     /^npx\s+(jest|vitest|tsc|eslint)\b.*$/,
+    /^node\s+--test\b.*$/,
     /^(jest|vitest|tsc|eslint)\b.*$/,
     /^pytest\b.*$/,
     /^python\s+-m\s+(pytest|ruff|mypy)\b.*$/,

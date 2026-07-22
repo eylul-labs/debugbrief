@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.13
+
+- Detect Node.js built-in test runner reproduction commands such as
+  `node --test test/*.test.js`.
+
 ## 0.0.12
 
 - Detect Python wrapper reproduction commands such as `python -m mypy`,

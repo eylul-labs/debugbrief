@@ -32,6 +32,13 @@ Expected true to be false
   );
   assert.equal(
     detectReproductionCommand(`
+node --test test/*.test.js
+not ok 1 - handles fixture
+`),
+    'node --test test/*.test.js'
+  );
+  assert.equal(
+    detectReproductionCommand(`
 mypy src
 error: Argument 1 has incompatible type
 `),
@@ -83,6 +90,9 @@ test('detects TypeScript and test signals', () => {
   assert.ok(signals.includes('typescript'));
   assert.ok(signals.includes('test-failure'));
   assert.ok(signals.includes('typescript-diagnostic'));
+
+  const nodeSignals = detectSignals('node --test test/*.test.js\nnot ok 1', 'test/debugBrief.test.js');
+  assert.ok(nodeSignals.includes('javascript-test'));
 });
 
 test('builds a markdown debug brief', () => {
