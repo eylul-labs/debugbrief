@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.14
+
+- Detect common browser and UI test reproduction commands such as
+  `npx playwright test` and `cypress run`.
+
 ## 0.0.13
 
 - Detect Node.js built-in test runner reproduction commands such as

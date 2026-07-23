@@ -39,6 +39,20 @@ not ok 1 - handles fixture
   );
   assert.equal(
     detectReproductionCommand(`
+npx playwright test tests/login.spec.ts
+Error: expect(locator).toBeVisible()
+`),
+    'npx playwright test tests/login.spec.ts'
+  );
+  assert.equal(
+    detectReproductionCommand(`
+cypress run --spec cypress/e2e/login.cy.ts
+AssertionError: Timed out retrying
+`),
+    'cypress run --spec cypress/e2e/login.cy.ts'
+  );
+  assert.equal(
+    detectReproductionCommand(`
 mypy src
 error: Argument 1 has incompatible type
 `),

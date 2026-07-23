@@ -99,11 +99,11 @@ export function detectReproductionCommand(input: string): string | null {
   const lines = input.split(/\r?\n/).map((line) => line.trim());
   const commandPatterns = [
     /^(npm|pnpm|yarn|bun)\s+(run\s+)?(test|build|lint|typecheck|check)\b.*$/,
-    /^(npm|pnpm|yarn|bun)\s+exec\s+(jest|vitest|tsc|eslint)\b.*$/,
-    /^(pnpm|yarn|bun)\s+(jest|vitest|tsc|eslint)\b.*$/,
-    /^npx\s+(jest|vitest|tsc|eslint)\b.*$/,
+    /^(npm|pnpm|yarn|bun)\s+exec\s+(jest|vitest|tsc|eslint|playwright|cypress|mocha)\b.*$/,
+    /^(pnpm|yarn|bun)\s+(jest|vitest|tsc|eslint|playwright|cypress|mocha)\b.*$/,
+    /^npx\s+(jest|vitest|tsc|eslint|playwright|cypress|mocha)\b.*$/,
     /^node\s+--test\b.*$/,
-    /^(jest|vitest|tsc|eslint)\b.*$/,
+    /^(jest|vitest|tsc|eslint|playwright|cypress|mocha)\b.*$/,
     /^pytest\b.*$/,
     /^python\s+-m\s+(pytest|ruff|mypy)\b.*$/,
     /^(uv|poetry|pipenv)\s+run\s+(pytest|ruff|mypy)\b.*$/,
